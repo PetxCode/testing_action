@@ -16,6 +16,17 @@ jobs:
           node-version: '14'
       - run: npm ci
       - run: npm run build
+     
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubunto-latest
+    
+    steps: 
+      - name: Checkout repository
+        uses: action/checkout@main
+      - name: Download artifact
+        uses: action/download-artifact@main
       - name: GitHub Action for Firebase
         uses: w9jds/firebase-action@v1.5.0
         with:
